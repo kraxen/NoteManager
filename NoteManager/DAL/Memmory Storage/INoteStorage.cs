@@ -9,6 +9,7 @@ namespace NoteManager.DAL.Memmory_Storage
         void Delete(int id);
         IReadOnlyCollection<Note> GetAll();
         IReadOnlyCollection<Note> Search(string nameSearch, string TextSearch);
+        Note GetById(int id);
     }
 }
 

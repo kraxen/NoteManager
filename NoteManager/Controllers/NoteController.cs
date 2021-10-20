@@ -27,5 +27,11 @@ namespace NoteManager.Controllers
 
             return Ok(notes);
         }
+        public IActionResult GetById(int id)
+        {
+            var note = _noteStorage.GetById(id);
+
+            return Ok(note);
+        }
     }
 }

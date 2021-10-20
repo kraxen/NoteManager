@@ -64,5 +64,9 @@ namespace NoteManager.DAL.Memmory_Storage
             }
             return result.ToList();
         }
+        public Note GetById(int id)
+        {
+            return _notes.FirstOrDefault(x => x.Id == id);
+        }
     }
 }
