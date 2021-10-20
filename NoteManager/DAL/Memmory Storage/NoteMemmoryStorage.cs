@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NoteManager.DAL.Memmory_Storage
 {
-    public class NoteMemmoryStorage
+    public class NoteMemmoryStorage : INoteStorage
     {
         private readonly List<Note> _notes;
         private int _lastId;
@@ -38,7 +38,7 @@ namespace NoteManager.DAL.Memmory_Storage
         }
         public void Add(Note note)
         {
-            note.Id = _lastId;
+            note.Id = _lastId++;
             _notes.Add(note);
         }
         public void Delete(int id)
@@ -52,7 +52,25 @@ namespace NoteManager.DAL.Memmory_Storage
         }
         public IReadOnlyCollection<Note> Search(string nameSearch, string TextSearch)
         {
-            return _notes.FindAll(n => n.Name.Contains(nameSearch) && n.Text.Contains(TextSearch));
+            var result = _notes.AsQueryable();
+
+            if (!string.IsNullOrEmpty(nameSearch))
+            {
+                result = result.Where(x => x.Name.Contains(nameSearch.Trim(), StringComparison.OrdinalIgnoreCase));
+            }
+            if (!string.IsNullOrEmpty(TextSearch))
+            {
+                result = result.Where(x => x.Text.Contains(TextSearch.Trim(), StringComparison.OrdinalIgnoreCase));
+            }
+            return result.ToList();
+        }
+        public Note GetById(int id)
+        {
+            return _notes.FirstOrDefault(x => x.Id == id);
+        }
+        public bool IsNameUnique(string name)
+        {
+            return _notes.FirstOrDefault(x => x.Name == name) == null;
         }
     }
 }
