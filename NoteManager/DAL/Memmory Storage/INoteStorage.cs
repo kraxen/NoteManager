@@ -10,6 +10,7 @@ namespace NoteManager.DAL.Memmory_Storage
         IReadOnlyCollection<Note> GetAll();
         IReadOnlyCollection<Note> Search(string nameSearch, string TextSearch);
         Note GetById(int id);
+        bool IsNameUnique(string name);
     }
 }
 

@@ -38,7 +38,7 @@ namespace NoteManager.DAL.Memmory_Storage
         }
         public void Add(Note note)
         {
-            note.Id = _lastId;
+            note.Id = _lastId++;
             _notes.Add(note);
         }
         public void Delete(int id)
@@ -67,6 +67,10 @@ namespace NoteManager.DAL.Memmory_Storage
         public Note GetById(int id)
         {
             return _notes.FirstOrDefault(x => x.Id == id);
+        }
+        public bool IsNameUnique(string name)
+        {
+            return _notes.FirstOrDefault(x => x.Name == name) == null;
         }
     }
 }
