@@ -52,7 +52,17 @@ namespace NoteManager.DAL.Memmory_Storage
         }
         public IReadOnlyCollection<Note> Search(string nameSearch, string TextSearch)
         {
-            return _notes.FindAll(n => n.Name.Contains(nameSearch) && n.Text.Contains(TextSearch));
+            var result = _notes.AsQueryable();
+
+            if (!string.IsNullOrEmpty(nameSearch))
+            {
+                result = result.Where(x => x.Name.Contains(nameSearch.Trim(), StringComparison.OrdinalIgnoreCase));
+            }
+            if (!string.IsNullOrEmpty(TextSearch))
+            {
+                result = result.Where(x => x.Text.Contains(TextSearch.Trim(), StringComparison.OrdinalIgnoreCase));
+            }
+            return result.ToList();
         }
     }
 }

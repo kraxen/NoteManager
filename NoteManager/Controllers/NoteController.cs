@@ -21,9 +21,9 @@ namespace NoteManager.Controllers
             _noteStorage = noteStorage;
         }
 
-        public IActionResult GetNotes()
+        public IActionResult GetNotes(string name, string text)
         {
-            var notes = _noteStorage.GetAll();
+            var notes = _noteStorage.Search(name,text);
 
             return Ok(notes);
         }
