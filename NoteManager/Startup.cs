@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NoteManager.DAL.Memmory_Storage;
+using NoteManager.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,12 @@ namespace NoteManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddNoteStorageService();
+            services.AddScoped<GlobalExceptonFilter>();
             services.AddControllersWithViews(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
+
+                options.Filters.Add(typeof(GlobalExceptonFilter));
             }).AddXmlSerializerFormatters();
         }
 
