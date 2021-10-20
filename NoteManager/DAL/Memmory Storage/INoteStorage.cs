@@ -1,4 +1,4 @@
-﻿using NoteManager.DAL.Domain;
+using NoteManager.DAL.Domain;
 using System.Collections.Generic;
 
 namespace NoteManager.DAL.Memmory_Storage
@@ -13,4 +13,3 @@ namespace NoteManager.DAL.Memmory_Storage
         bool IsNameUnique(string name);
     }
 }
-
