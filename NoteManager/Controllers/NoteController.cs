@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NoteManager.DAL.Memmory_Storage;
+using NoteManager.Filters;
 using NoteManager.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace NoteManager.Controllers
 {
+    //[ServiceFilter(typeof(GlobalExceptonFilter))]
     public class NoteController : Controller
     {
         private readonly ILogger<NoteController> _logger;
