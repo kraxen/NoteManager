@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NoteManager.DAL.Memmory_Storage
 {
-    public class NoteMemmoryStorage
+    public class NoteMemmoryStorage : INoteStorage
     {
         private readonly List<Note> _notes;
         private int _lastId;

@@ -1,11 +1,14 @@
-﻿using System;
+﻿using NoteManager.DAL.Domain;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NoteManager.DAL.Memmory_Storage
 {
-    interface INoteStorage
+    public interface INoteStorage
     {
+        void Add(Note note);
+        void Delete(int id);
+        IReadOnlyCollection<Note> GetAll();
+        IReadOnlyCollection<Note> Search(string nameSearch, string TextSearch);
     }
 }
+

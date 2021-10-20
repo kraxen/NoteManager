@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NoteManager.DAL.Memmory_Storage;
 using NoteManager.Models;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,19 @@ namespace NoteManager.Controllers
     public class NoteController : Controller
     {
         private readonly ILogger<NoteController> _logger;
+        private readonly INoteStorage _noteStorage;
 
-        public NoteController(ILogger<NoteController> logger)
+        public NoteController(ILogger<NoteController> logger, INoteStorage noteStorage)
         {
             _logger = logger;
+            _noteStorage = noteStorage;
         }
 
-        public IActionResult Index()
+        public IActionResult GetNotes()
         {
-            return View();
+            var notes = _noteStorage.GetAll();
+
+            return Ok(notes);
         }
     }
 }
